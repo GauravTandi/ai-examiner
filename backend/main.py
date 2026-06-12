@@ -3,27 +3,49 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
-class Answer(BaseModel):
+class QnA(BaseModel):
+    question: int
     answer: str
+
+
+questions = [
+        {
+        "que": "What javascript extension ?",
+        "ans": "js"
+        },
+        {
+        "que": "What python extension ?",
+        "ans": "py"
+        },
+        {
+        "que": "What html extension ?",
+        "ans": "html"
+        }
+    ]
 
 @app.get('/')
 def home():
     return {"status":"ok"}
 
-@app.get("/question")
-def give_question():
-    return {"question":"ques1"}
+@app.get("/question/{id}")
+def give_question(id: int):
+    return {"question":questions[id]["que"]}
 
 @app.post("/answer")
-def give_answer(answer: Answer):
-    right_answer = "orange"
+def give_answer(qna: QnA):
+    question = qna.question
+    answer = qna.answer
+    
+    ans = questions[question]["ans"]
     result = ""
-    if answer.answer.lower() == right_answer:
+    
+    if answer.lower() == ans.lower():
         result = "correct"
     else:
         result = "wrong"
 
     return {
-        "answer": answer.answer.lower(),
-        "result": result    
+        "given_answer": answer,
+        "correct_answer": ans,
+        "result": result
     }
