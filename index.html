@@ -7,26 +7,18 @@
 <body>
     <h1>Exam Test Question</h1>
     <hr>
-    <p>what is the color of orange ?</p>
+    <p id="queTextArea"></p>
+    <button id="prevBtn">Previous Que</button>
     <input type="text" id="answer" placeholder="Type your answer">
-    <button id="btnBox"> submit </button>
+    <button id="btnBox"> Submit </button>
+    <button id="nxtBtn">Next Que</button>
     <hr>
     <div id="result">Result here</div> 
-    <div id="checkCW">answer: (correct / wrong) </div>
+    <div id="checkCW"></div>
 
-    <script>
-        const button = document.getElementById("btnBox");
-        const answer = document.getElementById("answer");
 
-        button.addEventListener("click", function() {
-            document.getElementById("result").innerText = answer.value.toLowerCase();
-            if (answer.value.toLowerCase() == "orange") {
-                document.getElementById("checkCW").innerText = "answer: correct"
-            } else {
-                document.getElementById("checkCW").innerText = "answer: wrong"
-            };
-        });
 
-    </script>
+
+    <script src="app.js"></script>
 </body>
 </html>
